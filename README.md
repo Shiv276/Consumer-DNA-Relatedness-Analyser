@@ -240,14 +240,21 @@ requiring the user to perform the filtering manually.
 
 #### **6. Duplicate-variant removal**
 
-After a successful merge, PLINK 2 assigns chromosome-position identifiers to
-the variants and removes duplicate records.
+After a successful merge, PLINK 2 standardises each variant identifier using its chromosome # and retained genomic position.
 
-The final cleaned merged dataset is stored in:
+When multiple records consequently share the same identifier:
+
+- matching duplicate records are reduced to one copy; and
+- every copy of a conflicting duplicate group is excluded.
+
+PLINK also writes a list of the duplicate identifiers encountered. 
+
+The final cleaned merged dataset is stored as:
 
 ```text
-merged_files/
+merged_files/merged_all_no_dups.*
 ```
+
 
 #### **7. KING relatedness analysis**
 
@@ -380,7 +387,10 @@ preferably analyse files using the same genome build which is often guaranteed w
 #### → The Fix:
 Multi-marker build detection and build harmonisation algorithms have already been designed, and are seen to function successfully through preliminary testing, however they are still unrefined and need further work to integrate into my current pipeline. <br>
 
-The program in its current form ignores changes in chromosomal coordinates when two SNP variants share a rsID but differ in position. As such, SNPs with the same rsID are considered to be the same variant call. Through observation in various datasets, changes in chromosomal coordinates generally appear to be minimal, and strongly associated with different genome assemblies which has no statistical effect on rsID integrity. Regardless, rsIDs can have complicated mapping histories and not always maintain their identity. Therefore, the genomic build harmoniser is a fairly necessary path for the future.
+The program in its current form ignores changes in chromosomal coordinates when two SNP variants share a rsID but differ in position. As such, SNPs with the same rsID are considered to be the same variant call. Through observation in various datasets, changes in chromosomal coordinates generally appear to be minimal, and strongly associated with different genome assemblies which has no statistical effect on rsID integrity.
+
+At the same time, all copies of chromosomal-coordinate duplicate records are excluded. This avoids arbitrarily retaining an incompatible variant and may reduce the influence of ambiguous records on downstream kinship estimates. Regardless, rsIDs can have complicated mapping histories and not always maintain their identity. Therefore, a fully functioning genomic build harmoniser is a fairly necessary path for the future.
+
 <br>
 <br>
 #### Overall Limitations
