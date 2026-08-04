@@ -23,7 +23,7 @@ plink1.9 --version
 plink2 --version
 ```
 
-A future graphical or web-based interface is also being considered to reduce the command-line and external dependency requirements. This may likely occur in the future when I create more 'broad-use' bioinformatic tools and function as a hub of popular tools for my own research rather than random projects like this one.
+A future graphical or web-based interface is also being considered to reduce the command-line and external dependency requirements. This may likely occur in the future when I create more 'broad-use' bioinformatic tools and function as a hub of popular tools for my own research rather than miscellaneous projects like this one.
 
 ## Usage:
 The program accepts either individual DNA file paths or one folder containing
